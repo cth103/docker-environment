@@ -1,0 +1,4 @@
+Host git.carlh.net
+HostName git.carlh.net
+UserKnownHostsFile /dev/null
+StrictHostKeyChecking no
