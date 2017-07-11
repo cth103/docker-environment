@@ -1,0 +1,12 @@
+FROM debian:8
+
+RUN apt-get update
+RUN apt-get -y install git openssh-server g++ pkg-config libgtk2.0-dev libxml++2.6-dev \
+    libboost-filesystem-dev libboost-test-dev libboost-locale-dev libboost-regex-dev libboost-date-time-dev libboost-thread-dev \
+    libssl-dev libxmlsec1-dev cmake libx264-dev yasm libsndfile-dev libmagick++-dev libpulse-dev \
+    libwxgtk3.0-dev libasound2-dev wx3.0-i18n libsamplerate-dev wget curl libpangomm-1.4-dev \
+    libcurl4-openssl-dev libzip-dev nettle-dev libssh-gcrypt-dev devscripts
+
+ADD http://git.carlh.net/gitweb/?p=cdist.git;a=blob_plain;f=cdist;hb=refs/heads/docker2 /usr/bin/cdist
+RUN chmod u+x /usr/bin/cdist
+ADD config /root/.config/cdist
