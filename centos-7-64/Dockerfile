@@ -1,11 +1,7 @@
 FROM centos:7
 
-RUN yum -y install gcc-c++ boost-devel
-RUN yum -y install git
 RUN yum -y --enablerepo=extras install epel-release
-RUN yum -y install yasm
-RUN yum -y install bzip2
-RUN yum -y install make
+RUN yum -y install gcc-c++ boost-devel git yasm bzip2 make libxml++-devel cmake openssl-devel
 
 RUN mkdir /src
 
@@ -18,5 +14,8 @@ ADD http://ftp.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-20170705-2
 RUN cd /src && tar xjf x264-snapshot-20170705-2245.tar.bz2 && cd x264-snapshot-20170705-2245 && \
     ./configure --enable-static --disable-shared && make -j4 && make install
 
-RUN yum -y install libxml++-devel
-RUN yum -y install cmake
+ADD http://git.carlh.net/gitweb/?p=cdist.git;a=blob_plain;f=cdist;hb=refs/heads/docker2 /usr/bin/cdist
+RUN chmod u+x /usr/bin/cdist
+ADD config /root/.config/cdist
+
+RUN yum -y install xmlsec1-devel ImageMagick-devel libtool
