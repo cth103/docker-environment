@@ -1,7 +1,9 @@
 FROM centos:6
 
 RUN yum -y --enablerepo=extras install epel-release
-RUN yum -y install gcc-c++ boost-devel git yasm bzip2 make libxml++-devel cmake openssl-devel xz
+RUN yum -y install gcc-c++ boost-devel git yasm bzip2 make libxml++-devel cmake openssl-devel xz libtool-ltdl-devel \
+    xmlsec1-devel ImageMagick-devel libtool python-argparse xmlsec1-openssl-devel pcre-devel xz-devel pulseaudio-libs-devel \
+    alsa-lib-devel gtk2-devel
 
 RUN mkdir /src
 
@@ -18,15 +20,6 @@ ADD http://git.carlh.net/gitweb/?p=cdist.git;a=blob_plain;f=cdist;hb=refs/heads/
 RUN chmod u+x /usr/bin/cdist
 ADD config /root/.config/cdist
 
-RUN yum -y install xmlsec1-devel ImageMagick-devel libtool
-RUN yum -y install python-argparse
-
 # boost is too old
 ADD https://dl.bintray.com/boostorg/release/1.63.0/source/boost_1_63_0.tar.bz2 /src/
 RUN cd /src && tar xjf boost_1_63_0.tar.bz2 && cd boost_1_63_0 && ./bootstrap.sh && ./b2 link=static --without-python install
-
-RUN yum -y install libtool-ltdl-devel
-RUN yum -y install xmlsec1-openssl-devel
-RUN yum -y install pcre-devel
-RUN yum -y install xz-devel
-RUN yum -y install pulseaudio-libs-devel
