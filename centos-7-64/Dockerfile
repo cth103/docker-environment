@@ -1,7 +1,10 @@
 FROM centos:7
 
 RUN yum -y --enablerepo=extras install epel-release
-RUN yum -y install gcc-c++ boost-devel git yasm bzip2 make libxml++-devel cmake openssl-devel
+RUN yum -y install gcc-c++ git yasm bzip2 make libxml++-devel cmake openssl-devel xz libtool-ltdl-devel \
+    xmlsec1-devel ImageMagick-devel ImageMagick-c++-devel libtool python-argparse xmlsec1-openssl-devel pcre-devel xz-devel pulseaudio-libs-devel \
+    alsa-lib-devel gtk2-devel libcurl-devel libicu-devel libsamplerate-devel libzip-devel pangomm-devel nettle-devel \
+    gettext libssh-devel libsndfile-devel rpm-build boost-devel compat-wxGTK3-gtk2-devel
 
 RUN mkdir /src
 
@@ -17,5 +20,3 @@ RUN cd /src && tar xjf x264-snapshot-20170705-2245.tar.bz2 && cd x264-snapshot-2
 ADD http://git.carlh.net/gitweb/?p=cdist.git;a=blob_plain;f=cdist;hb=refs/heads/docker2 /usr/bin/cdist
 RUN chmod u+x /usr/bin/cdist
 ADD config /root/.config/cdist
-
-RUN yum -y install xmlsec1-devel ImageMagick-devel libtool
