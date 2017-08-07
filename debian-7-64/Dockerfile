@@ -17,7 +17,3 @@ RUN cd /src && tar xjf wxWidgets-3.0.3.tar.bz2 && cd /src/wxWidgets-3.0.3 && \
 ADD http://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz /src/
 RUN cd /src && tar xzf yasm-1.3.0.tar.gz && cd yasm-1.3.0 && \
     ./configure && make -j8 && make install
-
-ADD http://git.carlh.net/gitweb/?p=cdist.git;a=blob_plain;f=cdist;hb=refs/heads/docker2 /usr/bin/cdist
-RUN chmod u+x /usr/bin/cdist
-ADD config /root/.config/cdist
