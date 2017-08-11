@@ -7,6 +7,5 @@ RUN apt-get -y install git openssh-server g++ pkg-config libgtk2.0-dev libxml++2
     libwxgtk3.0-dev libasound2-dev wx3.0-i18n libsamplerate-dev wget curl libpangomm-1.4-dev \
     libcurl4-openssl-dev libzip-dev nettle-dev libssh-gcrypt-dev devscripts
 
-ADD http://git.carlh.net/gitweb/?p=cdist.git;a=blob_plain;f=cdist;hb=refs/heads/docker2 /usr/bin/cdist
-RUN chmod u+x /usr/bin/cdist
-ADD config /root/.config/cdist
+RUN useradd -ms /bin/bash carl
+RUN useradd -ms /bin/bash jenkins

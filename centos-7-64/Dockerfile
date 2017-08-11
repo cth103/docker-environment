@@ -17,6 +17,5 @@ ADD http://ftp.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-20170705-2
 RUN cd /src && tar xjf x264-snapshot-20170705-2245.tar.bz2 && cd x264-snapshot-20170705-2245 && \
     ./configure --enable-static --disable-shared && make -j4 && make install
 
-ADD http://git.carlh.net/gitweb/?p=cdist.git;a=blob_plain;f=cdist;hb=refs/heads/docker2 /usr/bin/cdist
-RUN chmod u+x /usr/bin/cdist
-ADD config /root/.config/cdist
+RUN useradd -ms /bin/bash carl
+RUN useradd -ms /bin/bash jenkins

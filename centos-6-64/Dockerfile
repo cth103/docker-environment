@@ -30,7 +30,5 @@ RUN cd /src && tar xjf wxWidgets-3.0.3.tar.bz2 && cd /src/wxWidgets-3.0.3 && \
 ADD https://curl.haxx.se/download/curl-7.54.1.tar.bz2 /src/
 RUN cd /src && tar xjf curl-7.54.1.tar.bz2 && cd /src/curl-7.54.1 && ./configure --enable-static --disable-shared && make -j8 && make install
 
-ADD http://git.carlh.net/gitweb/?p=cdist.git;a=blob_plain;f=cdist;hb=refs/heads/docker2 /usr/bin/cdist
-RUN chmod u+x /usr/bin/cdist
-ADD config /root/.config/cdist
-
+RUN useradd -ms /bin/bash carl
+RUN useradd -ms /bin/bash jenkins
