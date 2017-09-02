@@ -20,11 +20,13 @@ RUN cd /src && tar xjf x264-snapshot-20170705-2245.tar.bz2 && cd x264-snapshot-2
 # boost is too old
 ADD https://dl.bintray.com/boostorg/release/1.63.0/source/boost_1_63_0.tar.bz2 /src/
 RUN cd /src && tar xjf boost_1_63_0.tar.bz2 && cd boost_1_63_0 && ./bootstrap.sh && ./b2 link=static --without-python install
+RUN rm -rf /src/boost_1_63_0
 
 # We need wxWidgets3 linked against GTK2
 ADD https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.tar.bz2 /src/
 RUN cd /src && tar xjf wxWidgets-3.0.3.tar.bz2 && cd /src/wxWidgets-3.0.3 && \
 ./configure --enable-static --disable-shared --enable-prefseditor && make -j8 && make install
+RUN rm -rf /src/wxWidgets-3.0.3
 
 # curl is too old
 ADD https://curl.haxx.se/download/curl-7.54.1.tar.bz2 /src/
