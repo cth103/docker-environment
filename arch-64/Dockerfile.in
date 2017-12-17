@@ -2,6 +2,6 @@ FROM base/archlinux
 
 RUN pacman -Syu
 RUN pacman --noconfirm -S git gcc pkg-config libxml++2.6 boost openssl xmlsec cmake libx264 libsndfile imagemagick libpulse wxgtk libsamplerate \
-    wget pangomm libzip nettle nasm make python icu
+    wget pangomm libzip nettle nasm make python icu libssh
 
 include add_users
