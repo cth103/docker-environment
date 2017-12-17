@@ -18,7 +18,7 @@ else:
             targets.append(target)
 
 for target in targets:
-    if not os.path.isdir("target"):
+    if not os.path.isdir(target):
         print>>sys.stderr,'Unknown target %s' % target
         continue
     with open(os.path.join(target, 'Dockerfile.in'), 'r') as in_file, open(os.path.join(target, 'Dockerfile'), 'w') as out_file:
