@@ -13,4 +13,5 @@ ADD https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.
 RUN cd /src && tar xjf wxWidgets-3.0.3.tar.bz2 && cd /src/wxWidgets-3.0.3 && \
     ./configure --enable-static --disable-shared --enable-prefseditor && make -j4 && make install
 
+include ffcmp
 include add_users

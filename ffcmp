@@ -1,0 +1,2 @@
+RUN apt-get -y install libavformat-dev libavcodec-dev libavutil-dev
+RUN git clone git://git.carlh.net/git/ffcmp.git && cd ffcmp && ./waf configure build install
