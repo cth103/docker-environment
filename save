@@ -18,6 +18,6 @@ else:
 
 all = ''
 for target in targets:
-    all += '%s ' % target	
+    all += '%s ' % target
 
-os.system('docker save %s > save.tar' % all)
+os.system('docker save %s -o save.tar' % all)
