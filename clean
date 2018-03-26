@@ -1,0 +1,20 @@
+#!/bin/bash
+if [ "$1" == '--all' ]; then
+    c=$(docker ps -q -a)
+    if [ "$c" != "" ]; then
+	docker kill $c
+	docker rm $c
+    fi
+else
+    c=$(docker ps -q -f status=exited)
+    if [ "$c" != "" ]; then
+	docker rm $c
+    fi
+fi
+im=`docker images | tail -n +2 | \
+    grep -v ^ubuntu- | grep -v ^debian- | grep -v ^fedora- | grep -v ^centos- | grep -v ^mageia- | grep -v ^windows | grep -v ^arch | \
+    awk '{print $3;}'`
+if [ "$im" != "" ]; then
+    docker rmi $im
+fi
+
