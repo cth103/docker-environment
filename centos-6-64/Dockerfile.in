@@ -4,7 +4,7 @@ RUN yum -y --enablerepo=extras install epel-release
 RUN yum -y install gcc-c++ git yasm bzip2 make libxml++-devel cmake openssl-devel xz libtool-ltdl-devel \
     xmlsec1-devel ImageMagick-devel ImageMagick-c++-devel libtool python-argparse xmlsec1-openssl-devel pcre-devel xz-devel pulseaudio-libs-devel \
     alsa-lib-devel gtk2-devel libcurl-devel libicu-devel libsamplerate-devel libzip-devel pangomm-devel nettle-devel \
-    gettext libssh-devel libsndfile-devel rpm-build
+    gettext libssh-devel libsndfile-devel rpm-build perl-devel
 
 RUN mkdir /src
 
@@ -28,5 +28,9 @@ RUN rm -rf /src/wxWidgets-3.0.3
 # curl is too old
 ADD https://curl.haxx.se/download/curl-7.54.1.tar.bz2 /src/
 RUN cd /src && tar xjf curl-7.54.1.tar.bz2 && cd /src/curl-7.54.1 && ./configure --enable-static --disable-shared && make -j8 && make install
+
+# git is too old
+ADD https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.16.3.tar.xz /src/
+RUN cd /src && tar xJf git-2.16.3.tar.xz && cd /src/git-2.16.3 && ./configure && make -j8 && make install
 
 include add_users
