@@ -1,0 +1,13 @@
+FROM ubuntu:18.04
+
+RUN apt-get update
+RUN apt-get -y install \
+    autoconf automake autopoint bash bison bzip2 flex gettext \
+    git g++ gperf intltool libffi-dev libgdk-pixbuf2.0-dev \
+    libtool-bin libltdl-dev libssl-dev libxml-parser-perl make \
+    openssl p7zip-full patch perl pkg-config python ruby scons \
+    sed unzip wget xz-utils openssh-server cmake nsis yasm curl vim nano sudo
+RUN cd /opt && git clone git://git.carlh.net/git/mxe.git && cd mxe && git checkout ardour2 && make -j8
+
+include add_users
+RUN echo "carl ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/carl && chmod 0440 /etc/sudoers.d/carl
