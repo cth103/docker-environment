@@ -2,6 +2,17 @@ FROM base/archlinux
 
 RUN pacman --noconfirm -Syu
 RUN pacman --noconfirm -S git gcc pkg-config libxml++2.6 boost openssl xmlsec cmake libx264 libsndfile imagemagick libpulse wxgtk libsamplerate \
-    wget pangomm libzip nettle nasm make python icu libssh ffmpeg
+    wget pangomm libzip nettle nasm make python icu libssh ffmpeg nano
+
+RUN mkdir /src
+ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig
+RUN cd src && git clone git://git.carlh.net/git/ffmpeg-cdist.git && cd ffmpeg-cdist && git checkout 4bd8d09 && ./configure --disable-indev=jack --enable-gpl --enable-libx264 --disable-static --enable-shared && make -j8 && make install
+RUN cd src && git clone git://git.carlh.net/git/asdcplib-cth.git && cd asdcplib-cth && git checkout 8259318 && ./waf configure build install
+RUN cd src && git clone git://git.carlh.net/git/locked_sstream.git && cd locked_sstream && ./waf configure build install
+RUN cd src && git clone git://git.carlh.net/git/libcxml.git && cd libcxml && git checkout v0.15.6 && ./waf configure build install
+RUN cd src && git clone git://git.carlh.net/git/libdcp.git && cd libdcp && git checkout v1.5.7 && ./waf configure build install
+RUN cd src && git clone git://git.carlh.net/git/libsub.git && cd libsub && git checkout eb88d114 && ./waf configure build install
+RUN cd src && git clone git://git.carlh.net/git/rtaudio-cdist.git && cd rtaudio-cdist && git checkout 739969e && ./configure && make -j8 && make install
+RUN cd src && git clone git://git.carlh.net/git/dcpomatic.git && cd dcpomatic && git checkout v2.12.x
 
 include add_users
