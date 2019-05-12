@@ -4,7 +4,7 @@ RUN yum -y --enablerepo=extras install epel-release
 RUN yum -y install gcc-c++ git yasm bzip2 make libxml++-devel cmake openssl-devel xz libtool-ltdl-devel \
     xmlsec1-devel ImageMagick-devel ImageMagick-c++-devel libtool python-argparse xmlsec1-openssl-devel pcre-devel xz-devel pulseaudio-libs-devel \
     alsa-lib-devel gtk2-devel libcurl-devel libicu-devel libsamplerate-devel libzip-devel pangomm-devel nettle-devel \
-    gettext libssh-devel libsndfile-devel rpm-build perl-devel
+    gettext libssh-devel libsndfile-devel rpm-build perl-devel mesa-libGL-devel
 
 RUN mkdir /src
 
@@ -22,7 +22,7 @@ RUN rm -rf /src/boost_1_63_0
 # We need wxWidgets3 linked against GTK2
 ADD https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.tar.bz2 /src/
 RUN cd /src && tar xjf wxWidgets-3.0.3.tar.bz2 && cd /src/wxWidgets-3.0.3 && \
-    ./configure --enable-static --disable-shared --enable-prefseditor && make -j8 && make install
+    ./configure --enable-static --disable-shared --enable-prefseditor --with-opengl && make -j8 && make install
 RUN rm -rf /src/wxWidgets-3.0.3
 
 # curl is too old
