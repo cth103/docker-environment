@@ -7,7 +7,7 @@ RUN apt-get -y install git openssh-server g++ pkg-config libgtk2.0-dev libxml++2
     libssl-dev libxmlsec1-dev cmake libx264-dev yasm libsndfile-dev libmagick++-dev libpulse-dev \
     libwxgtk3.0-dev libasound2-dev wx3.0-i18n libsamplerate-dev wget curl libpangomm-1.4-dev libssh-dev \
     libcurl4-openssl-dev libzip-dev nettle-dev devscripts gdb xmlsec1 xmldiff gpac ttf-mscorefonts-installer \
-    snapcraft fuse
+    snapcraft fuse libpolkit-gobject-1-dev
 
 ADD https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage /usr/local/bin
 RUN chmod a+rx /usr/local/bin/appimagetool-x86_64.AppImage
