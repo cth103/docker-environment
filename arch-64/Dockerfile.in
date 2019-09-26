@@ -1,4 +1,4 @@
-FROM base/archlinux
+FROM archlinux/base
 
 RUN pacman --noconfirm -Syu
 RUN pacman --noconfirm -S git gcc pkg-config libxml++2.6 boost openssl xmlsec cmake libx264 libsndfile imagemagick libpulse wxgtk libsamplerate \
