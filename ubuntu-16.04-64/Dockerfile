@@ -1,0 +1,20 @@
+FROM ubuntu:16.04
+
+RUN apt-get update
+RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
+RUN apt-get -y install git openssh-server g++ pkg-config libgtk2.0-dev libxml++2.6-dev \
+libboost-filesystem-dev libboost-test-dev libboost-locale-dev libboost-regex-dev libboost-date-time-dev libboost-thread-dev \
+libssl-dev libxmlsec1-dev cmake libx264-dev yasm libsndfile-dev libmagick++-dev libpulse-dev \
+libwxgtk3.0-dev libasound2-dev wx3.0-i18n libsamplerate-dev wget curl libpangomm-1.4-dev libssh-dev \
+libcurl4-openssl-dev libzip-dev nettle-dev devscripts gdb xmlsec1 xmldiff gpac ttf-mscorefonts-installer \
+snapcraft fuse libpolkit-gobject-1-dev libxerces-c-dev libnanomsg-dev
+
+ADD https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage /usr/local/bin
+RUN chmod a+rx /usr/local/bin/appimagetool-x86_64.AppImage
+ADD https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage /usr/local/bin
+RUN chmod a+rx /usr/local/bin/linuxdeploy-x86_64.AppImage
+
+RUN apt-get -y install libavformat-dev libavcodec-dev libavutil-dev
+RUN git clone git://git.carlh.net/git/ffcmp.git && cd ffcmp && ./waf configure build install
+RUN useradd -ms /bin/bash -u 1000 carl
+RUN useradd -ms /bin/bash -u 124 jenkins

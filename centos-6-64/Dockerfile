@@ -1,0 +1,41 @@
+FROM centos:6
+
+RUN yum -y --enablerepo=extras install epel-release
+RUN yum -y install gcc-c++ git yasm bzip2 make libxml++-devel cmake openssl-devel xz libtool-ltdl-devel \
+xmlsec1-devel ImageMagick-devel ImageMagick-c++-devel libtool python-argparse xmlsec1-openssl-devel pcre-devel xz-devel pulseaudio-libs-devel \
+alsa-lib-devel gtk2-devel libcurl-devel libicu-devel libsamplerate-devel libzip-devel pangomm-devel nettle-devel \
+gettext libssh-devel libsndfile-devel rpm-build perl-devel mesa-libGL-devel mesa-libGLU-devel xerces-c-devel
+
+RUN mkdir /src
+
+# libx264 requires a newer nasm than is provided by the repos
+ADD http://www.nasm.us/pub/nasm/releasebuilds/2.13/nasm-2.13.tar.xz /src/
+ADD https://src.fedoraproject.org/rpms/nasm/raw/0cc3eb244bd971df81a7f02bc12c5ec259e1a5d6/f/0001-Remove-invalid-pure_func-qualifiers.patch /src/
+RUN cd /src && tar xJf nasm-2.13.tar.xz && cd nasm-2.13 && ./configure && patch -p1 < ../0001-Remove-invalid-pure_func-qualifiers.patch && make -j4 && make install
+
+# libx264 is not packaged by Centos as far as I can see
+ADD http://ftp.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-20170705-2245.tar.bz2 /src/
+RUN cd /src && tar xjf x264-snapshot-20170705-2245.tar.bz2 && cd x264-snapshot-20170705-2245 && \
+./configure --enable-static --disable-shared && make -j4 && make install
+
+# boost is too old
+ADD https://dl.bintray.com/boostorg/release/1.63.0/source/boost_1_63_0.tar.bz2 /src/
+RUN cd /src && tar xjf boost_1_63_0.tar.bz2 && cd boost_1_63_0 && ./bootstrap.sh && ./b2 link=static --without-python install
+RUN rm -rf /src/boost_1_63_0
+
+# We need wxWidgets3 linked against GTK2
+ADD https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.tar.bz2 /src/
+RUN cd /src && tar xjf wxWidgets-3.0.3.tar.bz2 && cd /src/wxWidgets-3.0.3 && \
+./configure --enable-static --disable-shared --enable-prefseditor --with-opengl && make -j8 && make install
+RUN rm -rf /src/wxWidgets-3.0.3
+
+# curl is too old
+ADD https://curl.haxx.se/download/curl-7.54.1.tar.bz2 /src/
+RUN cd /src && tar xjf curl-7.54.1.tar.bz2 && cd /src/curl-7.54.1 && ./configure --enable-static --disable-shared && make -j8 && make install
+
+# git is too old
+ADD https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.16.3.tar.xz /src/
+RUN cd /src && tar xJf git-2.16.3.tar.xz && cd /src/git-2.16.3 && ./configure && make -j8 && make install
+
+RUN useradd -ms /bin/bash -u 1000 carl
+RUN useradd -ms /bin/bash -u 124 jenkins
