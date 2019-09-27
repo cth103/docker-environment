@@ -2,7 +2,7 @@ FROM archlinux/base
 
 RUN pacman --noconfirm -Syu
 RUN pacman --noconfirm -S git gcc pkg-config libxml++2.6 boost openssl xmlsec cmake libx264 libsndfile imagemagick libpulse wxgtk libsamplerate \
-    wget pangomm libzip nettle nasm make python icu libssh ffmpeg nano
+    wget pangomm libzip nettle nasm make python icu libssh ffmpeg nano awk diffutils
 
 RUN mkdir /src
 ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig
