@@ -2,7 +2,7 @@ FROM mageia:6
 
 RUN dnf -y install gcc-c++ libxml++2.6-devel boost-devel yasm cmake openssl-devel lib64xmlsec1-devel libsndfile-devel gtk2-devel \
 	lib64graphicsmagick-devel libcurl-devel libsamplerate-devel libzip-devel pangomm-devel nettle-devel lib64wxgtku3.0-devel \
-	lib64ssh-devel rpm-build git lib64pulseaudio-devel alsa-lib-devel gettext lib64icu-devel curl polkit-devel
+	lib64ssh-devel rpm-build git lib64pulseaudio-devel alsa-lib-devel gettext lib64icu-devel curl polkit-devel xerces-c-devel
 
 # libx264 requires a newer nasm than is provided by the repos
 include nasm

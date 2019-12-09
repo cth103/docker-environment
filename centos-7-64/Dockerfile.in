@@ -4,7 +4,7 @@ RUN yum -y --enablerepo=extras install epel-release
 RUN yum -y install gcc-c++ git yasm bzip2 make libxml++-devel openssl-devel xz libtool-ltdl-devel \
     xmlsec1-devel ImageMagick-devel ImageMagick-c++-devel libtool python-argparse xmlsec1-openssl-devel pcre-devel xz-devel pulseaudio-libs-devel \
     alsa-lib-devel gtk2-devel libcurl-devel libicu-devel libsamplerate-devel libzip-devel pangomm-devel nettle-devel \
-    gettext libssh-devel libsndfile-devel rpm-build boost-devel compat-wxGTK3-gtk2-devel
+    gettext libssh-devel libsndfile-devel rpm-build boost-devel compat-wxGTK3-gtk2-devel xerces-c-devel
 
 RUN mkdir /src
 

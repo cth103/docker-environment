@@ -7,7 +7,7 @@ RUN apt-get -y install git openssh-server g++ pkg-config libgtk2.0-dev libxml++2
     libssl-dev xmlsec1 libxmlsec1-dev cmake libx264-dev yasm libsndfile-dev libmagick++-dev libpulse-dev \
     libwxgtk3.0-dev libasound2-dev wx3.0-i18n libsamplerate-dev wget curl libpangomm-1.4-dev libssh-dev \
     libcurl4-openssl-dev libzip-dev nettle-dev devscripts libfftw3-dev libfluidsynth-dev gpac \
-    liblilv-dev autoconf fuse xmldiff ccache gdb libpolkit-gobject-1-dev
+    liblilv-dev autoconf fuse xmldiff ccache gdb libpolkit-gobject-1-dev libxerces-c-dev
 
 include ffcmp
 include add_users

@@ -2,7 +2,7 @@ FROM fedora:30
 
 RUN dnf -y install gcc-c++ libxml++-devel boost-devel cmake openssl-devel xmlsec1-openssl-devel libsndfile-devel libtool-ltdl-devel gtk2-devel \
 	GraphicsMagick-c++-devel libcurl-devel libsamplerate-devel libzip-devel pangomm-devel nettle-devel wxGTK3-devel compat-wxGTK3-gtk2-devel \
-	libssh-devel rpm-build git pulseaudio-libs-devel alsa-lib-devel gettext make polkit-devel
+	libssh-devel rpm-build git pulseaudio-libs-devel alsa-lib-devel gettext make polkit-devel xerces-c-devel
 
 include nasm
 include x264
