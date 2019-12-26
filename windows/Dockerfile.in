@@ -6,7 +6,7 @@ RUN apt-get -y install \
     git g++ gperf intltool libffi-dev libgdk-pixbuf2.0-dev \
     libtool-bin libltdl-dev libssl-dev libxml-parser-perl make \
     openssl p7zip-full patch perl pkg-config python ruby scons \
-    sed unzip wget xz-utils openssh-server cmake nsis yasm curl
-RUN cd /opt && git clone git://git.carlh.net/git/mxe.git && cd mxe && make -j8
+    sed unzip wget xz-utils openssh-server cmake nsis yasm curl lzip
+RUN cd /opt && git clone git://git.carlh.net/git/mxe.git && git checkout carl-1 && make -j8
 
 include add_users
