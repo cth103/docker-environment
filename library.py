@@ -2,7 +2,7 @@ import os
 import pwd
 
 def insert_magic(line):
-    return line.replace('$USER_NAME', pwd.getpwuid(os.getuid()).pw_name).replace('$USER_ID', str(os.getuid()))
+    return line.replace('$USER_NAME', pwd.getpwuid(os.getuid()).pw_name).replace('$USER_ID', str(os.getuid())).replace('$JENKINS_USER_ID', str(pwd.getpwnam('jenkins').pw_uid))
 
 def make_dockerfile(target):
     with open(os.path.join(target, 'Dockerfile.in'), 'r') as in_file, open(os.path.join(target, 'Dockerfile'), 'w') as out_file:
