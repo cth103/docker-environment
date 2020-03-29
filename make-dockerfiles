@@ -6,5 +6,5 @@ import argparse
 from library import make_dockerfile
 
 for target in os.listdir('.'):
-    if os.path.isdir(target) and target != '.git':
+    if os.path.isdir(target) and target != '.git' and not target.startswith('__pycache'):
         make_dockerfile(target)
