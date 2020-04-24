@@ -5,8 +5,7 @@ RUN dnf config-manager --enable PowerTools
 RUN yum -y install gcc-c++ git yasm bzip2 make openssl-devel libtool-ltdl-devel \
     xmlsec1-devel ImageMagick-devel ImageMagick-c++-devel libtool xmlsec1-openssl-devel pcre-devel xz-devel pulseaudio-libs-devel \
     alsa-lib-devel gtk2-devel libcurl-devel libicu-devel libsamplerate-devel libzip-devel pangomm-devel nettle-devel \
-    gettext libssh-devel libsndfile-devel rpm-build boost-devel compat-wxGTK3-gtk2-devel nasm python2 cmake xerces-c-devel \
-    nanomsg-devel
+    gettext libssh-devel libsndfile-devel rpm-build boost-devel compat-wxGTK3-gtk2-devel nasm python2 cmake xerces-c-devel
 
 RUN cd /usr/bin && ln -s python2 python
 
@@ -20,5 +19,9 @@ RUN cd /src && tar xjf x264-snapshot-20170705-2245.tar.bz2 && cd x264-snapshot-2
 # Neither is libxml++
 ADD http://ftp.gnome.org/pub/GNOME/sources/libxml++/2.40/libxml++-2.40.1.tar.xz /src/
 RUN cd /src && tar xJf libxml++-2.40.1.tar.xz && cd libxml++-2.40.1 && ./configure --enable-static --disable-shared && make -j4 && make install
+
+# And neither is nanomsg
+ADD https://github.com/nanomsg/nanomsg/archive/1.1.5.tar.gz /src/nanomsg-1.1.5.tar.gz
+RUN cd /src && tar xzf nanomsg-1.1.5.tar.gz && cd nanomsg-1.1.5 && cmake -DNN_STATIC_LIB=ON && make -j4 && make install
 
 include add_users
