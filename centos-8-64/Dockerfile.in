@@ -5,7 +5,7 @@ RUN dnf config-manager --enable PowerTools
 RUN yum -y install gcc-c++ git yasm bzip2 make openssl-devel libtool-ltdl-devel \
     xmlsec1-devel ImageMagick-devel ImageMagick-c++-devel libtool xmlsec1-openssl-devel pcre-devel xz-devel pulseaudio-libs-devel \
     alsa-lib-devel gtk2-devel libcurl-devel libicu-devel libsamplerate-devel libzip-devel pangomm-devel nettle-devel \
-    gettext libssh-devel libsndfile-devel rpm-build boost-devel compat-wxGTK3-gtk2-devel nasm python2 cmake xerces-c-devel
+    gettext libssh-devel libsndfile-devel rpm-build boost-devel compat-wxGTK3-gtk2-devel nasm python2 cmake xerces-c-devel polkit-devel
 
 RUN cd /usr/bin && ln -s python2 python
 
