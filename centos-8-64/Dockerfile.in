@@ -1,5 +1,6 @@
 FROM centos:8
 
+RUN dnf clean all && rm -r /var/cache/dnf && dnf upgrade -y && dnf update -y
 RUN yum -y --enablerepo=extras install epel-release yum-utils
 RUN dnf config-manager --enable PowerTools
 RUN yum -y install gcc-c++ git yasm bzip2 make openssl-devel libtool-ltdl-devel \
